@@ -74,9 +74,7 @@ const Dashboard = () => {
     const fetchEvents = async () => {
       
         setTimeout(() => {
-          const savedEvents = JSON.parse(localStorage.getItem('events')) || [];
           const combinedEvents = [
-            ...savedEvents,
             ...EVENTS.map(event => ({
               ...event,
               status: event.status || 'active',

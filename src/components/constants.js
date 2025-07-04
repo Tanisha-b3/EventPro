@@ -1,20 +1,9 @@
-async function fetchEvents() {
-  try {
-    const response = await fetch('http://localhost:5000/api/events');
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    const backendEvents = await response.json();
-    return backendEvents.map((event, index) => ({
-      ...event,
-      id: event._id,
-      image: images[index % images.length],
-    }));
-  } catch (error) {
-    console.error('Error fetching events:', error);
-    return [];
-  }
-}
+// const response = await fetch('http://localhost:5000/api/events');
+// if (!response.ok) {
+//   throw new Error('Network response was not ok');
+// }
+// const backendEvents = await response.json();
+
 
 import image3 from '../assets/image3.jpg'
 import image4 from '../assets/image4.jpg'
@@ -23,8 +12,14 @@ import image2 from '../assets/image8.jpg';
 import image6 from '../assets/image3.jpg';
 import image7 from '../assets/image4.jpg';
 
-const images = [image1, image2, image3, image4,image6,image7]
+// const images = [image1, image2, image3, image4,image6,image7]
+// const eventsWithImages = backendEvents.map((event, index) => ({
+//   ...event,
+//   id:event._id, 
+//   image: images[index % images.length],
+// }));
 
+// console.log(eventsWithImages);
 const EVENTS1= [
   { 
     id: 1, 
@@ -237,7 +232,7 @@ const EVENTS1= [
     image: image4
   }
 ];
-// export const EVENTS = [...EVENTS1,...eventsWithImages]
+export const EVENTS = [...EVENTS1]
 
 export const EVENT_CATEGORIES = [
   'Technology', 'Music', 'Food', 'Business', 'Sports',
@@ -269,8 +264,4 @@ export const messages = [
     { id: 1, title: 'Event Reminder', content: 'Dear attendee,\n\nThis is a reminder about our upcoming event...' },
     { id: 2, title: 'Thank You', content: 'Dear attendee,\n\nThank you for attending our event...' },
     { id: 3, title: 'Feedback Request', content: 'Dear attendee,\n\nWe would love your feedback about...' }
-];
-export async function getEvents() {
-  const dynamicEvents = await fetchEvents();
-  return [...EVENTS1, ...dynamicEvents];
-}
+]; 
