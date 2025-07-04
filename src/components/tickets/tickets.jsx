@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FaTicketAlt, FaCalendarAlt, FaMapMarkerAlt, FaTrash } from 'react-icons/fa'
-import './MyTickets.css';
+import './tickets.css'
 import Header from '../../pages/header.jsx';
 import Footer from '../../pages/footer.jsx';
 // import { useNavigate } from 'react-router-dom';
