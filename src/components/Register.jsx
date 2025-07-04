@@ -6,26 +6,11 @@ import { FcGoogle } from 'react-icons/fc';
 import { FaFacebook } from 'react-icons/fa';
 import Header from '../pages/header.jsx';
 import Footer from '../pages/footer.jsx';
-import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider, signInWithPopup, FacebookAuthProvider, createUserWithEmailAndPassword } from "firebase/auth";
 import './Register.css';
 import loginImage from '../assets/loginImage.jpg';
 
 // Firebase configuration (same as in Login)
-const firebaseConfig = {
-  apiKey: "AIzaSyDCt1MuWr6uramrXStJR0wkT6ontoitGVw",
-  authDomain: "events-4556e.firebaseapp.com",
-  projectId: "events-4556e",
-  storageBucket: "events-4556e.appspot.com",
-  messagingSenderId: "876445573959",
-  appId: "1:876445573959:web:a38178eb588826d04c6262"
-};
-
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const googleProvider = new GoogleAuthProvider();
-const facebookProvider = new FacebookAuthProvider();
 
 function Register() {
   const [signupInfo, setSignupInfo] = useState({
@@ -134,12 +119,9 @@ function Register() {
       setSocialLoading({ ...socialLoading, facebook: false });
     }
   };
-
-  // ... rest of your JSX remains the same ...
   return (
     <>
       <div className='register-page-container'>
-        {/* Image Section */}
         <div className='register-image-section'>
           <img 
             src={loginImage} 
@@ -186,14 +168,14 @@ function Register() {
                 {socialLoading.google ? 'Signing up...' : 'Continue with Google'}
               </button>
               
-              {/* <button 
+              <button 
                 className="social-btn facebook-btn"
                 onClick={handleFacebookSignup}
                 disabled={socialLoading.facebook}
               >
                 <FaFacebook className="social-icon" />
                 {socialLoading.facebook ? 'Signing up...' : 'Continue with Facebook'}
-              </button> */}
+              </button>
             </div>
             
             <div className="divider">

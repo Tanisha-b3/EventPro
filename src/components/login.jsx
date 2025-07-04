@@ -7,17 +7,6 @@ import { FaFacebook } from 'react-icons/fa';
 import "./Login.css";
 import Header from '../pages/header.jsx';
 import Footer from '../pages/footer.jsx';
-import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider, signInWithPopup, FacebookAuthProvider } from "firebase/auth";
-import { firebaseConfig } from '../pages/firebase/firebase.js';
-
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-auth.languageCode = 'it';
-const googleProvider = new GoogleAuthProvider();
-const facebookProvider = new FacebookAuthProvider();
 
 function Login() {
   const [loginInfo, setLoginInfo] = useState({

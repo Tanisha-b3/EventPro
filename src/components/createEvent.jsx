@@ -13,7 +13,10 @@ const CreateEvent = () => {
     description: '',
     category: '',
     ticketPrice: 0,
-    capacity: 0
+    capacity: 0,
+    attendees:0,
+    privacy:'public',
+    status:'active',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState(null);
@@ -31,7 +34,7 @@ const CreateEvent = () => {
   };
   const handleSubmit = async (e) => {
   try {
-      const response = await axios.post('https://event-pro-ohf3.vercel.app/api/events', eventData);
+      const response = await axios.post('http://localhost:5000/api/events', eventData);
       
       setSuccess(true);
       // Reset form on success
@@ -43,7 +46,11 @@ const CreateEvent = () => {
         description: '',
         category: '',
         ticketPrice: 0,
-        capacity: 0
+        capacity: 0,
+        attendees:0,
+        privacy:'',
+        status:'',
+
       });
       
     } catch (err) {
@@ -164,7 +171,39 @@ const CreateEvent = () => {
             required
           />
         </div>
-
+  <div className="form-group3">
+          <label>Attendees:</label>
+          <input
+            type="number"
+            name="Attendees"
+            value={eventData.attendees}
+            onChange={handleChange}
+            min="1"
+            required
+          />
+        </div>
+          <div className="form-group3">
+          <label>Privacy</label>
+          <input
+            type="text"
+            name="Privacy"
+            value={eventData.privacy}
+            onChange={handleChange}
+            min="public"
+            required
+          />
+        </div>
+          <div className="form-group3">
+          <label>Status:</label>
+          <input
+            type="text"
+            name="Status"
+            value={eventData.status}
+            onChange={handleChange}
+            min="active"
+            required
+          />
+        </div>
         <button type="submit" disabled={isSubmitting}>
           {isSubmitting ? 'Creating...' : 'Create Event'}
         </button>
