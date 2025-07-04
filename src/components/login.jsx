@@ -8,9 +8,8 @@ import "./Login.css";
 import Header from '../pages/header.jsx';
 import Footer from '../pages/footer.jsx';
 import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider, signInWithPopup, FacebookAuthProvider } from "firebase/auth";
-import { firebaseConfig } from '../pages/firebase/firebase.js';
-
+import { getAuth, GoogleAuthProvider, signInWithPopup, FacebookAuthProvider, signInWithEmailAndPassword} from "firebase/auth";
+import { firebaseConfig } from '../pages/firebase/firebase.js'
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -37,6 +36,41 @@ function Login() {
     setLoginInfo({ ...loginInfo, [name]: value });
   };
 
+  // const handleLogin = async (e) => {
+  //   e.preventDefault();
+  //   const { email, password } = loginInfo;
+
+  //   if (!email || !password) {
+  //     return handleError('Email and password are required');
+  //   }
+
+  //   setIsLoading(true);
+    
+  //   try {
+  //     const response = await fetch('https://event-pro-ohf3.vercel.app/api/auth/login', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json'
+  //       },
+  //       body: JSON.stringify(loginInfo)
+  //     });
+
+  //     const result = await response.json();
+      
+  //     if (response.ok) {
+  //       handleSuccess(result.message || 'Login successful');
+  //       localStorage.setItem('token', result.token);
+  //       localStorage.setItem('user', JSON.stringify(result.user));
+  //       navigate('/dashboard');
+  //     } else {
+  //       handleError(result.error || result.message || 'Login failed');
+  //     }
+  //   } catch (err) {
+  //     handleError(err.message || 'Something went wrong');
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
   const handleLogin = async (e) => {
     e.preventDefault();
     const { email, password } = loginInfo;
@@ -48,30 +82,28 @@ function Login() {
     setIsLoading(true);
     
     try {
-      const response = await fetch('https://event-pro-ohf3.vercel.app/api/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(loginInfo)
-      });
+      // Firebase email/password authentication
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
 
-      const result = await response.json();
-      
-      if (response.ok) {
-        handleSuccess(result.message || 'Login successful');
-        localStorage.setItem('token', result.token);
-        localStorage.setItem('user', JSON.stringify(result.user));
-        navigate('/dashboard');
-      } else {
-        handleError(result.error || result.message || 'Login failed');
-      }
-    } catch (err) {
-      handleError(err.message || 'Something went wrong');
+      // Store user data
+      localStorage.setItem('user', JSON.stringify({
+        uid: user.uid,
+        email: user.email,
+        displayName: user.displayName || '',
+        photoURL: user.photoURL || ''
+      }));
+      localStorage.setItem('token', user.accessToken);
+
+      handleSuccess('Login successful');
+      navigate('/dashboard');
+    } catch (error) {
+      console.log(error)
     } finally {
       setIsLoading(false);
     }
   };
+
 
   const handleGoogleLogin = async () => {
     setSocialLoading({ ...socialLoading, google: true });
