@@ -31,7 +31,7 @@ const CreateEvent = () => {
   };
   const handleSubmit = async (e) => {
   try {
-      const response = await axios.post('http://localhost:5000/api/events', eventData);
+      const response = await axios.post('https://event-pro-ohf3.vercel.app/api/events', eventData);
       
       setSuccess(true);
       // Reset form on success
