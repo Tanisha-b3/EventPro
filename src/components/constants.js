@@ -1,8 +1,8 @@
-// const response = await fetch('http://localhost:5000/api/events');
-// if (!response.ok) {
-//   throw new Error('Network response was not ok');
-// }
-// const backendEvents = await response.json();
+const response = await fetch('http://localhost:5000/api/events');
+if (!response.ok) {
+  throw new Error('Network response was not ok');
+}
+const backendEvents = await response.json();
 
 
 import image3 from '../assets/image3.jpg'
@@ -12,14 +12,14 @@ import image2 from '../assets/image8.jpg';
 import image6 from '../assets/image3.jpg';
 import image7 from '../assets/image4.jpg';
 
-// const images = [image1, image2, image3, image4,image6,image7]
-// const eventsWithImages = backendEvents.map((event, index) => ({
-//   ...event,
-//   id:event._id, 
-//   image: images[index % images.length],
-// }));
+const images = [image1, image2, image3, image4,image6,image7]
+const eventsWithImages = backendEvents.map((event, index) => ({
+  ...event,
+  id:event._id, 
+  image: images[index % images.length],
+}));
 
-// console.log(eventsWithImages);
+console.log(eventsWithImages);
 const EVENTS1= [
   { 
     id: 1, 
@@ -232,7 +232,7 @@ const EVENTS1= [
     image: image4
   }
 ];
-export const EVENTS = [...EVENTS1]
+export const EVENTS = [...EVENTS1,...eventsWithImages]
 
 export const EVENT_CATEGORIES = [
   'Technology', 'Music', 'Food', 'Business', 'Sports',

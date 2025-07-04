@@ -3,9 +3,10 @@ import { FaTicketAlt, FaCalendarAlt, FaMapMarkerAlt, FaTrash } from 'react-icons
 import './tickets.css'
 import Header from '../../pages/header.jsx';
 import Footer from '../../pages/footer.jsx';
-// import { useNavigate } from 'react-router-dom';
-
+import { useNavigate } from 'react-router-dom';
+ 
 const MyTickets = () => {
+    const navigate = useNavigate();
   const [tickets, setTickets] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -27,16 +28,16 @@ const MyTickets = () => {
   if (isLoading) {
     return <div>Loading...</div>
   }
-//  const navigate = useNavigate();
+
   return (
     <div className="my-tickets-container">
       <Header />
-      {/* <button 
+      <button 
                     className="btn-back"
                     onClick={() => navigate('/dashboard')}
                   >
                     <FaArrowLeft /> Back to Dashboard
-                  </button> */}
+                  </button>
       <main className="my-tickets-main">
         <h1>My Tickets</h1>
         

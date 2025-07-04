@@ -48,7 +48,7 @@ function Register() {
     setSignupInfo({ ...signupInfo, [name]: value });
   };
 
-   const handleSignup = async (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
     const { name, email, password, confirmPassword } = signupInfo;
 
@@ -59,27 +59,31 @@ function Register() {
     if (password !== confirmPassword) {
       return handleError('Passwords do not match');
     }
- setIsLoading(true);
+
+    setIsLoading(true);
+
     try {
-    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-    const user = userCredential.user;
+      // Firebase email/password registration
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
 
-    localStorage.setItem('user', JSON.stringify({
-      uid: user.uid,
-      name,
-      email: user.email,
-      createdAt: new Date().toISOString()
-    }));
-    localStorage.setItem('token', user.accessToken);
+      // Store user data in localStorage
+      localStorage.setItem('user', JSON.stringify({
+        uid: user.uid,
+        name,
+        email: user.email,
+        createdAt: new Date().toISOString()
+      }));
+      localStorage.setItem('token', user.accessToken);
 
-    handleSuccess('Registration successful!');
-    navigate('/dashboard');
-  } catch (error) {
-    handleError(error.message || 'Registration failed');
-  } finally {
-    setIsLoading(false);
-  }
-}
+      handleSuccess('Registration successful!');
+      navigate('/dashboard');
+    } catch (error) {
+      handleError(error.message || 'Registration failed');
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const handleGoogleSignup = async () => {
     setSocialLoading({ ...socialLoading, google: true });
