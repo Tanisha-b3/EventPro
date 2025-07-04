@@ -11,7 +11,6 @@ import { EVENTS} from './constants';
 import './Dashboard.css';
 import Location from '../components/featuresd/Location.jsx';
 import { LOCATION_OPTIONS } from './constants';
-// import Header1 from './dashboard/headerd.jsx';
 import CategoryFilter from './category.jsx';
 import EventCarousel from './featuresd/features.jsx';
 import { Attendees, tickets, messages } from './constants';
